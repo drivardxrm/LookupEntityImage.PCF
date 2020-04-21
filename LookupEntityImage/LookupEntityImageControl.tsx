@@ -1,7 +1,7 @@
 import * as React from "react";
 //import { useState, useEffect } from "react";
 //import { Stack, VirtualizedComboBox,TextField, IComboBoxOption,IComboBox, Image, IImageProps, ImageFit, warnConditionallyRequiredProps} from "@fluentui/react/lib/index"; 
-import { ImageIcon} from "@fluentui/react/lib/Icon";
+import {mergeStyles, ImageIcon} from "@fluentui/react/lib";
 // import { mergeStyles } from "@fluentui/react/lib/Styling";
 // import { initializeIcons } from "@fluentui/react/lib/icons";
 
@@ -9,6 +9,8 @@ import { ImageIcon} from "@fluentui/react/lib/Icon";
 //PROPS for component (received from caller)
 export interface ILookupEntityImageProps {
     imagedata: string;
+    imagesize: number;
+    rounded: boolean
 }
 
 
@@ -19,11 +21,17 @@ const LookupEntityImageControl = (props : ILookupEntityImageProps): JSX.Element 
     // const [selectedOption, setSelectedOption] = useState<IComboBoxOption|undefined>(undefined);
     // const [isLoading, setIsLoading] = useState<boolean>(true);
 
+    const rounded = mergeStyles({
+        borderRadius: 0.5
+    })
 
+    
 
     //MAIN RENDERING
     return ( 
-        <ImageIcon style={{  width:32, height:32 }} imageProps={{src:"data:image/jpeg;base64," + props.imagedata ,width:25,height:25}}/> 
+        <ImageIcon imageProps={{src:"data:image/jpeg;base64," + props.imagedata ,
+                                width:props.imagesize,
+                                height:props.imagesize}}/> 
     )
     
                 

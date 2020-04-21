@@ -58,9 +58,10 @@ export class LookupEntityImage implements ComponentFramework.StandardControl<IIn
 	{
 		// Add code to update control view
 		let lookup:LookupValue[] =  context.parameters.lookup.raw;
+		let imagesize:number =  context.parameters.imagesize.raw || 25; //default 25 pixels
 		if(lookup !== null && lookup !== undefined && lookup[0] !== null)
 		{
-			this.getLookupImage(lookup[0]);
+			this.getLookupImage(lookup[0], imagesize);
 		}
 	}
 
@@ -82,7 +83,7 @@ export class LookupEntityImage implements ComponentFramework.StandardControl<IIn
 		// Add code to cleanup control if necessary
 	}
 
-	private async getLookupImage(lookupvalue:LookupValue)
+	private async getLookupImage(lookupvalue:LookupValue, imagesize:number)
 	{
 
 		let lookuprecord :ComponentFramework.WebApi.Entity 
@@ -90,10 +91,10 @@ export class LookupEntityImage implements ComponentFramework.StandardControl<IIn
 		
 		
 		if(lookuprecord["entityimage"] !== null && lookuprecord["entityimage"] !== undefined && lookuprecord["entityimage"] !== "")
-		{
-			//this._props.imagedata = lookuprecord["entityimage"];
+		{;
 			let props:ILookupEntityImageProps = {
-				imagedata : lookuprecord["entityimage"]
+				imagedata : lookuprecord["entityimage"],
+				imagesize : imagesize
 			}
 			// RENDER React Component
 			ReactDOM.render(
